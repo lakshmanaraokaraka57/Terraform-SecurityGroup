@@ -5,36 +5,21 @@ pipeline{
         component='backend'
         appVersion=''
     }
+    options{
+        ansiColor('xterm') 
+    }
     stages{
-        stage('Read Version'){
-            steps{
-                script{
-                    
-                    def packageJson = readJSON file: 'package.json'
-                    appVersion=packageJson.version
-                    echo "appversion is:$appVersion"
-                }
-            }
-        }
-        stage('Install Dependencies'){
+        stage('Terraform Init'){
             steps{
                 script{
                     sh """
-                     npm install
+                     cd security_group
+                     terraform init -reconfigure
                     """
                 }
             }
         }
-        stage('Docker Build'){
-            steps{
-                script{
-                    sh """
-                      docker build -t backend:v1.0.0 .
-                   
-                    """
-                }
-            }
-        }
+        
     }
     post{
         success{
