@@ -12,10 +12,12 @@ pipeline{
         stage('Terraform Init'){
             steps{
                 script{
-                    sh """
-                     cd security_group
-                     terraform init -reconfigure
-                    """
+                    withAWS(region:'us-east-1', credentiala:'aws-creds'){
+                       sh """
+                              cd security_group
+                              terraform init -reconfigure
+                          """
+                    }
                 }
             }
         }
