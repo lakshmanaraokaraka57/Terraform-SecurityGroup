@@ -13,7 +13,7 @@ pipeline{
             steps{
                 script{
                     sh """
-                     cd security_group
+                     cd /c/Users/lasya/OneDrive/Documents/terraform/Infrastructure/security_group
                      terraform init -reconfigure
                     """
                 }
