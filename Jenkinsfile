@@ -1,20 +1,19 @@
 pipeline{
     agent { label 'AGENT-1' }
-    environment{
-        PROJECT='expense'
-        component='backend'
-        appVersion=''
-    }
+    // environment{
+    //     PROJECT='expense'
+    //     component='backend'
+    //     appVersion=''
+    // }
     options{
         ansiColor('xterm') 
     }
     stages{
         stage('Terraform Init'){
             steps{
-                dir('Infrastructure/security_group')
                 script{
                     sh """
-                     
+                     cd security_group
                      terraform init -reconfigure
                     """
                 }
