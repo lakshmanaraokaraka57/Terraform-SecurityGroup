@@ -11,9 +11,10 @@ pipeline{
     stages{
         stage('Terraform Init'){
             steps{
+                dir('Infrastructure/security_group')
                 script{
                     sh """
-                     cd /c/Users/lasya/OneDrive/Documents/terraform/Infrastructure/security_group
+                     
                      terraform init -reconfigure
                     """
                 }
